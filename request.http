@@ -1,5 +1,51 @@
 ###
-POST http://localhost:5000/api/users  HTTP/1.1
+POST http://localhost:7000/api/users  HTTP/1.1
 Content-Type: application/json
 
-{}
+{
+    "name": "aver asd",
+    "idDoc": 312231,
+    "correo": "asd@gmail.com"
+}
+###
+GET http://localhost:7000/api/users  HTTP/1.1
+
+###
+GET http://localhost:7000/api/users/653b0abfa2ed45bee640d4ae  HTTP/1.1
+
+###
+PUT http://localhost:7000/api/users/653b0bb779993ff470418446  HTTP/1.1
+Content-Type: application/json
+
+{
+    "name": "Bruno Tiglla Arrascue",
+    "idDoc": 201620847,
+    "correo": "bruno@gmail.com"
+}
+
+###
+DELETE  http://localhost:7000/api/users/653b10613ca7d586a3aaeaee  HTTP/1.1
+
+###
+POST  http://localhost:7000/api/users/653b0abfa2ed45bee640d4ae/bodegas  HTTP/1.1
+Content-Type: application/json
+
+{
+    "nombrebodega": "Bodega Venciatassdd",
+    "idDoc": 201620847,
+    "razonsocial": "bodega",
+    "ubicacion": "Jr de prueba 3"
+
+}
+###
+GET http://localhost:7000/api/bodegas/user/653b0abfa2ed45bee640d4ae  HTTP/1.1
+
+###
+POST  http://localhost:7000/api/auth/register
+Content-Type: application/json
+
+{
+  "correo": "ab",
+  "password": "ASsdD",
+  "username": "ASDaSDA"
+}
