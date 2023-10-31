@@ -19,7 +19,6 @@ exports.register = async (req, res) => {
       correo,
     });
     const userSaved = await newUser.save();
-    console.log(userSaved);
 
     const token = await jwtt.createAccessToken({
       id: userSaved._id,
@@ -83,6 +82,7 @@ exports.verifyToken = async (req, res) => {
 
   jwt.verify(token, TOKEN_SECRET, async (error, user) => {
     if (error) return res.sendStatus(401);
+    //console.log("thistoken", user);
 
     const userFound = await User.findById(user.id);
     if (!userFound) return res.sendStatus(401);

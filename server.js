@@ -6,6 +6,7 @@ const userRoutes = require("./src/user/user.routes");
 const bodegaRoutes = require("./src/bodega/bodega.routes");
 const stockRoutes = require("./src/inventariostock/stock.routes");
 const authroutes = require("./src/user/auth/auth.routes");
+const tokenbodegaroutes = require("./src/bodega/token/tokenbodega.routes");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 require("dotenv").config();
@@ -25,6 +26,7 @@ app.use("/api", userRoutes);
 app.use("/api", bodegaRoutes);
 app.use("/api", stockRoutes);
 app.use("/api/auth", authroutes);
+app.use("/api", tokenbodegaroutes);
 
 app.get("/api", (req, res) => {
   //res.json({"users": ["A","B","C"]});

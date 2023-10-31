@@ -1,29 +1,35 @@
-const mongoose = require('mongoose');
+const mongoose = require("mongoose");
 
-const BodegaSchema = new mongoose.Schema({
+const BodegaSchema = new mongoose.Schema(
+  {
     nombrebodega: {
-        type: String,
-        required: true,
+      type: String,
+      required: true,
+      unique: true,
     },
     idDoc: {
-        type: Number,
-        required: true,
+      type: Number,
+      required: true,
+      unique: true,
     },
     razonsocial: {
-        type: String,
+      type: String,
     },
     ubicacion: {
-        type: String,
+      type: String,
     },
     usuario: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
-    active:{
-        type:Boolean,
-        default:false
-    }
-});
-
-module.exports = mongoose.model('Bodega', BodegaSchema);
+    active: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
+module.exports = mongoose.model("Bodega", BodegaSchema);

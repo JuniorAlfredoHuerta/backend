@@ -1,60 +1,104 @@
-const generalFunctions = require('../Generalfuctions');
-const Stock = require('./stock.model');
-const Bodega = require('../bodega/bodega.model');
+const generalFunctions = require("../Generalfuctions");
+const Stock = require("./stock.model");
+const Bodega = require("../bodega/bodega.model");
 
 exports.createProducto = async (req, res) => {
-    try {
-      const userId = req.params.id; 
-      const userData = req.body; 
-  
-      const stock = new Stock({
-        nombre: userData.nombre,
-        cantidad: userData.cantidad,
-        preciocompra : userData.preciocompra,
-        precioventa: userData.precioventa,
-        ubicacion: userData.ubicacion,
-        description: userData.description,
-        alias: userData.alias,
-        bodega: userId
-      });
-  
-      await stock.save();
-  
-  
-      res.status(201).json(stock);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: error });
-    }
-  };
+  try {
+    const {
+      nombre,
+      cantidad,
+      preciocompra,
+      precioventa,
+      ubicacion,
+      description,
+      alias,
+    } = req.body;
+
+    //console.log(req.bodega.id);
+
+    const stock = new Stock({
+      nombre,
+      cantidad,
+      preciocompra,
+      precioventa,
+      ubicacion,
+      description,
+      alias,
+      bodega: req.bodega.id,
+    });
+
+    const savesstock = await stock.save();
+    //console.log(stock);
+    //console.log(savesstock);
+    res.status(201).json(savesstock);
+  } catch (error) {
+    //console.error(error);
+    res.status(500).json({ error: error });
+  }
+};
 
 exports.getProductosbyBodegaId = async (req, res) => {
-    try {
-      const userId = req.params.id; 
-      const stocks = await Stock.find({ bodega: userId });
-  
-      res.status(200).json(stocks);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: error });
-    }
-  };
+  try {
+    const userId = req.params.id;
+    const stocks = await Stock.find({ bodega: userId });
 
-exports.getUsers = (req, res) => {
-  generalFunctions.getModel(Stock, res);
-}
+    res.status(200).json(stocks);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: error });
+  }
+};
 
-exports.getUserById = (req, res) => {
-  const { id } = req.params;
-  generalFunctions.getModelById(Stock, id, res);
-}
+exports.updateProducto = async (req, res) => {
+  try {
+    const {
+      nombre,
+      cantidad,
+      preciocompra,
+      precioventa,
+      ubicacion,
+      description,
+      alias,
+    } = req.body;
+    const stockupdate = await Stock.findOneAndUpdate(
+      { _id: req.params.id },
+      {
+        nombre,
+        cantidad,
+        preciocompra,
+        precioventa,
+        ubicacion,
+        description,
+        alias,
+      },
+      { new: true }
+    );
+    return res.json(stockupdate);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: error.message });
+  }
+};
 
-exports.updateUser = (req, res) => {
-  const { id } = req.params;
-  generalFunctions.updateModel(Stock, id, req, res);
-}
-
+exports.getStockbyId = async (req, res) => {
+  try {
+    const stock = await Stock.findById(req.params.id);
+    if (!stock) return res.status(404).json({ message: "stock not found" });
+    return res.json(stock);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
 exports.deleteUser = (req, res) => {
   const { id } = req.params;
   generalFunctions.deleteModel(Stock, id, res);
-}
+};
+
+exports.getStocks = async (req, res) => {
+  try {
+    const stocks = await Stock.find({ bodega: req.bodega.id });
+    res.json(stocks);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
+};
