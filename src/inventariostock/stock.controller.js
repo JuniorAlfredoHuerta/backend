@@ -73,6 +73,7 @@ exports.updateProducto = async (req, res) => {
       },
       { new: true }
     );
+    console.log(stockupdate);
     return res.json(stockupdate);
   } catch (error) {
     console.error(error);

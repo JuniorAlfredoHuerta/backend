@@ -5,7 +5,6 @@ const BodegaSchema = new mongoose.Schema(
     nombrebodega: {
       type: String,
       required: true,
-      unique: true,
     },
     idDoc: {
       type: Number,
