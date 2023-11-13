@@ -32,6 +32,9 @@ exports.register = async (req, res) => {
       id: userSaved._id,
       username: userSaved.username,
       correo: userSaved.correo,
+      name: userSaved.name,
+      birthdate: userSaved.birthdate,
+      idDoc: userSaved.idDoc,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -57,10 +60,14 @@ exports.login = async (req, res) => {
       secure: true,
       httpOnly: false,
     });
+    console.log(userFound);
     res.json({
       id: userFound._id,
       username: userFound.username,
       correo: userFound.correo,
+      name: userFound.name,
+      birthdate: userFound.birthdate,
+      idDoc: userFound.idDoc,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -86,11 +93,15 @@ exports.verifyToken = async (req, res) => {
 
     const userFound = await User.findById(user.id);
     if (!userFound) return res.sendStatus(401);
+    console.log(userFound);
 
     return res.json({
       id: userFound._id,
       username: userFound.username,
       correo: userFound.correo,
+      name: userFound.name,
+      birthdate: userFound.birthdate,
+      idDoc: userFound.idDoc,
     });
   });
 };
