@@ -9,7 +9,6 @@ const BodegaSchema = new mongoose.Schema(
     idDoc: {
       type: Number,
       required: true,
-      unique: true,
     },
     razonsocial: {
       type: String,

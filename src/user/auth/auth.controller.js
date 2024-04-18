@@ -19,6 +19,7 @@ exports.register = async (req, res) => {
       correo,
     });
     const userSaved = await newUser.save();
+    console.log(userSaved);
 
     const token = await jwtt.createAccessToken({
       id: userSaved._id,

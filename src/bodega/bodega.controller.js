@@ -6,6 +6,13 @@ exports.createBodega = async (req, res) => {
   try {
     const { nombrebodega, idDoc, razonsocial, ubicacion } = req.body;
 
+    // Validar que idDoc sea un número de 11 dígitos
+    if (!/^\d{11}$/.test(idDoc)) {
+      return res
+        .status(400)
+        .json({ error: "Este campo debe ser un número de 11 dígitos." });
+    }
+
     const bodega = new Bodega({
       nombrebodega,
       idDoc,
@@ -17,8 +24,7 @@ exports.createBodega = async (req, res) => {
     const savedbodega = await bodega.save();
     res.status(201).json(savedbodega);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: error });
+    res.status(500).json({ message: error.message });
   }
 };
 
