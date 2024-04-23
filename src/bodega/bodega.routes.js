@@ -11,7 +11,7 @@ router.get("/bodegas", auth.authRequired, bodegacontroller.getUsers);
 //update bodega
 router.put("/bodegas/:id", auth.authRequired, bodegacontroller.updateUser);
 //borrar bodega
-router.delete("/bodegas/:id", auth.authRequired, bodegacontroller.deleteUser);
+router.put("/bodegasde/:id", auth.authRequired, bodegacontroller.deleteUser);
 // crear bodega
 router.post("/bodegas", auth.authRequired, bodegacontroller.createBodega);
 //conseguir bodega por id

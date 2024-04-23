@@ -40,7 +40,7 @@ exports.getBodegasById = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
   try {
-    const bodegas = await Bodega.find({ usuario: req.user.id }).populate(
+    const bodegas = await Bodega.find({ usuario: req.user.id, active: true }).populate(
       "usuario"
     );
     res.json(bodegas);
@@ -49,6 +49,7 @@ exports.getUsers = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
 
 exports.updateUser = async (req, res) => {
   try {
@@ -67,11 +68,12 @@ exports.updateUser = async (req, res) => {
 
 exports.deleteUser = async (req, res) => {
   try {
-    const deletedbodega = await Bodega.findByIdAndDelete(req.params.id);
-    if (!deletedbodega)
-      return res.status(404).json({ message: "Bodega not found" });
-
-    return res.sendStatus(204);
+    const bodegaupdate = await Bodega.findOneAndUpdate(
+      { _id: req.params.id },
+      { active: false }, // Establecer active en false
+      { new: true }
+    );
+    return res.json(bodegaupdate);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
