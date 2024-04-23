@@ -61,7 +61,7 @@ exports.login = async (req, res) => {
       secure: true,
       httpOnly: false,
     });
-    console.log(userFound);
+
     res.json({
       id: userFound._id,
       username: userFound.username,

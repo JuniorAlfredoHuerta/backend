@@ -60,6 +60,7 @@ exports.updateUser = async (req, res) => {
     );
     return res.json(bodegaupdate);
   } catch (error) {
+    console.log(error);
     return res.status(500).json({ message: error.message });
   }
 };
