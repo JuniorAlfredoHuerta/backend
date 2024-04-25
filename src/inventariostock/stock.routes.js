@@ -8,7 +8,7 @@ const router = express.Router();
 router.get("/stocks", bodegaRequired, stockController.getStocks);
 router.get("/stock/:id", bodegaRequired, stockController.getStockbyId);
 router.put("/stock/:id", bodegaRequired, stockController.updateProducto);
-router.delete("/stock/:id", bodegaRequired, stockController.deleteUser);
+router.put("/stockde/:id", bodegaRequired, stockController.deleteStock);
 router.post("/stock", bodegaRequired, stockController.createProducto);
 router.get(
   "/stock/user/:id",

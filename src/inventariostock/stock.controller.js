@@ -40,7 +40,7 @@ exports.createProducto = async (req, res) => {
 exports.getProductosbyBodegaId = async (req, res) => {
   try {
     const userId = req.params.id;
-    const stocks = await Stock.find({ bodega: userId });
+    const stocks = await Stock.find({ bodega: userId , active: true });
 
     res.status(200).json(stocks);
   } catch (error) {
@@ -90,14 +90,22 @@ exports.getStockbyId = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
-exports.deleteUser = (req, res) => {
-  const { id } = req.params;
-  generalFunctions.deleteModel(Stock, id, res);
+exports.deleteStock = async (req, res) => {
+  try {
+    const stockdelete = await Stock.findOneAndUpdate(
+      { _id: req.params.id },
+      { active: false }, // Borrado logico
+      { new: true }
+    );
+    return res.json(stockdelete);
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 };
 
 exports.getStocks = async (req, res) => {
   try {
-    const stocks = await Stock.find({ bodega: req.bodega.id });
+    const stocks = await Stock.find({ bodega: req.bodega.id , active: true });
     res.json(stocks);
   } catch (error) {
     return res.status(500).json({ message: error.message });

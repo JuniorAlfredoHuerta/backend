@@ -70,7 +70,7 @@ exports.deleteUser = async (req, res) => {
   try {
     const bodegaupdate = await Bodega.findOneAndUpdate(
       { _id: req.params.id },
-      { active: false }, // Establecer active en false
+      { active: false }, // borrado logico
       { new: true }
     );
     return res.json(bodegaupdate);
