@@ -25,7 +25,7 @@ exports.register = async (req, res) => {
       id: userSaved._id,
     });
     res.cookie("token", token, {
-      sameSite: "none",
+      same_Site: "none",
       secure: true,
       httpOnly: false,
     });
@@ -57,7 +57,7 @@ exports.login = async (req, res) => {
     });
 
     res.cookie("token", token, {
-      sameSite: "none",
+      same_Site: "none",
       secure: true,
       httpOnly: false,
     });
@@ -77,7 +77,7 @@ exports.login = async (req, res) => {
 
 exports.logout = async (req, res) => {
   res.cookie("token", "", {
-    httpOnly: true,
+    httpOnly: false,
     secure: true,
     expires: new Date(0),
   });

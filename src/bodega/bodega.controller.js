@@ -40,16 +40,16 @@ exports.getBodegasById = async (req, res) => {
 
 exports.getUsers = async (req, res) => {
   try {
-    const bodegas = await Bodega.find({ usuario: req.user.id, active: true }).populate(
-      "usuario"
-    );
+    const bodegas = await Bodega.find({
+      usuario: req.user.id,
+      active: true,
+    }).populate("usuario");
     res.json(bodegas);
     //console.log(bodegas);
   } catch (error) {
     return res.status(500).json({ message: error.message });
   }
 };
-
 
 exports.updateUser = async (req, res) => {
   try {

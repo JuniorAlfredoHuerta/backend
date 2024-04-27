@@ -15,7 +15,7 @@ exports.tokenbodega = async (req, res) => {
     });
 
     res.cookie("tokenbodega", token, {
-      sameSite: "none",
+      same_Site: "none",
       secure: true,
       httpOnly: false,
     });
