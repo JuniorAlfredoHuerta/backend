@@ -87,7 +87,6 @@ exports.logout = async (req, res) => {
 
 exports.verifyToken = async (req, res) => {
   const token = req.headers.authorization;
-  console.log('Authorization',token)
 
   if (!token) return res.send(false);
 
