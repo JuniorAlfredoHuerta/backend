@@ -39,10 +39,9 @@ exports.getBodegasById = async (req, res) => {
 };
 
 exports.getUsers = async (req, res) => {
+  console.log(req.headers)
   const token = req.headers.authorization;
-
-
-
+  console.log(req.user.id)
   try {
     const bodegas = await Bodega.find({
       usuario: req.user.id,
