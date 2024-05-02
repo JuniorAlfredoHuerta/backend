@@ -18,10 +18,7 @@ app.use(cookieParser());
 
 //routes
 app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
+  cors()
 );
 app.use("/api", userRoutes);
 app.use("/api", bodegaRoutes);

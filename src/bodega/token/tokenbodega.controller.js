@@ -10,18 +10,18 @@ exports.tokenbodega = async (req, res) => {
     const bodegaFound = await Bodega.findOne({ _id: bodega });
     if (!bodegaFound) return res.status(404).json(["Bodega no existente"]);
 
-    const token = await createAccessToken({
+    const tokenbodega = await createAccessToken({
       id: bodegaFound._id,
     });
 
-    res.cookie("tokenbodega", token, {
+    /*res.cookie("tokenbodega", token, {
       same_Site: "none",
       secure: true,
       httpOnly: false,
-    });
+    });*/
 
     res.json({
-      id: bodegaFound._id,
+      tokenbodega: tokenbodega,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -29,7 +29,10 @@ exports.tokenbodega = async (req, res) => {
 };
 
 exports.verifyTokenbodega = async (req, res) => {
-  const { tokenbodega } = req.cookies;
+  console.log(req.headers)
+  const tokenbodega = req.headers.tokenbodega;
+  console.log(tokenbodega)
+
   if (!tokenbodega) return res.send(false);
 
   jwt.verify(tokenbodega, TOKEN_SECRET, async (error, data) => {
@@ -38,7 +41,8 @@ exports.verifyTokenbodega = async (req, res) => {
     const userFound = await Bodega.findById(data.id);
     if (!userFound) return res.sendStatus(401);
 
-    //console.log(userFound);
+
+    console.log(userFound);
 
     return res.json({
       id: userFound._id,

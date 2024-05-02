@@ -24,11 +24,11 @@ exports.register = async (req, res) => {
     const token = await jwtt.createAccessToken({
       id: userSaved._id,
     });
-    res.cookie("token", token, {
+    /*res.cookie("token", token, {
       same_Site: "none",
       secure: true,
       httpOnly: false,
-    });
+    });*/
     res.json({
       id: userSaved._id,
       username: userSaved.username,
@@ -56,13 +56,14 @@ exports.login = async (req, res) => {
       id: userFound._id,
     });
 
-    res.cookie("token", token, {
+    /*res.cookie("token", token, {
       same_Site: "none",
       secure: true,
       httpOnly: false,
-    });
+    });*/
 
     res.json({
+      token: token,
       id: userFound._id,
       username: userFound.username,
       correo: userFound.correo,
@@ -85,7 +86,9 @@ exports.logout = async (req, res) => {
 };
 
 exports.verifyToken = async (req, res) => {
-  const { token } = req.cookies;
+  const token = req.headers.authorization;
+  console.log('Authorization',token)
+
   if (!token) return res.send(false);
 
   jwt.verify(token, TOKEN_SECRET, async (error, user) => {

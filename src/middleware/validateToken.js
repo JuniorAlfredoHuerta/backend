@@ -3,7 +3,8 @@ const { TOKEN_SECRET } = require("./../../config");
 
 exports.authRequired = (req, res, next) => {
   try {
-    const { token } = req.cookies;
+    const token = req.headers.authorization;
+    
 
     if (!token)
       return res
@@ -24,7 +25,8 @@ exports.authRequired = (req, res, next) => {
 
 exports.bodegaRequired = (req, res, next) => {
   try {
-    const { tokenbodega } = req.cookies;
+    const tokenbodega = req.headers.tokenbodega;
+
 
     if (!tokenbodega)
       return res
@@ -35,6 +37,7 @@ exports.bodegaRequired = (req, res, next) => {
       if (error) {
         return res.status(401).json({ message: "Token is not valid" });
       }
+      else{"token verificado"}
       req.bodega = bodega;
       next();
     });
