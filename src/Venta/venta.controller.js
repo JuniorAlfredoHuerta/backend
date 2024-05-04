@@ -11,7 +11,7 @@ exports.CreaVenta = async (req, res) => {
     });
 
     const saveVenta = await venta.save();
-    console.log(saveVenta);
+    //console.log(saveVenta);
     res.status(201).json(saveVenta);
   } catch (error) {
     return res.status(500).json({ message: error.message });

@@ -29,9 +29,9 @@ exports.tokenbodega = async (req, res) => {
 };
 
 exports.verifyTokenbodega = async (req, res) => {
-  console.log(req.headers)
+  //console.log(req.headers)
   const tokenbodega = req.headers.tokenbodega;
-  console.log(tokenbodega)
+  //console.log(tokenbodega)
 
   if (!tokenbodega) return res.send(false);
 
@@ -41,8 +41,7 @@ exports.verifyTokenbodega = async (req, res) => {
     const userFound = await Bodega.findById(data.id);
     if (!userFound) return res.sendStatus(401);
 
-
-    console.log(userFound);
+    //console.log(userFound);
 
     return res.json({
       id: userFound._id,

@@ -17,9 +17,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 //routes
-app.use(
-  cors()
-);
+app.use(cors());
 app.use("/api", userRoutes);
 app.use("/api", bodegaRoutes);
 app.use("/api", stockRoutes);

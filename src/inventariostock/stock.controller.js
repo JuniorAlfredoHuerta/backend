@@ -40,7 +40,7 @@ exports.createProducto = async (req, res) => {
 exports.getProductosbyBodegaId = async (req, res) => {
   try {
     const userId = req.params.id;
-    const stocks = await Stock.find({ bodega: userId , active: true });
+    const stocks = await Stock.find({ bodega: userId, active: true });
 
     res.status(200).json(stocks);
   } catch (error) {
@@ -73,7 +73,7 @@ exports.updateProducto = async (req, res) => {
       },
       { new: true }
     );
-    console.log(stockupdate);
+    //console.log(stockupdate);
     return res.json(stockupdate);
   } catch (error) {
     console.error(error);
@@ -105,7 +105,7 @@ exports.deleteStock = async (req, res) => {
 
 exports.getStocks = async (req, res) => {
   try {
-    const stocks = await Stock.find({ bodega: req.bodega.id , active: true });
+    const stocks = await Stock.find({ bodega: req.bodega.id, active: true });
     res.json(stocks);
   } catch (error) {
     return res.status(500).json({ message: error.message });

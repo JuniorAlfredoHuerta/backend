@@ -39,9 +39,9 @@ exports.getBodegasById = async (req, res) => {
 };
 
 exports.getUsers = async (req, res) => {
-  console.log(req.headers)
+  //console.log(req.headers)
   const token = req.headers.authorization;
-  console.log(req.user.id)
+  //console.log(req.user.id)
   try {
     const bodegas = await Bodega.find({
       usuario: req.user.id,
@@ -63,7 +63,7 @@ exports.updateUser = async (req, res) => {
     );
     return res.json(bodegaupdate);
   } catch (error) {
-    console.log(error);
+    //console.log(error);
     return res.status(500).json({ message: error.message });
   }
 };

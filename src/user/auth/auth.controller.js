@@ -19,7 +19,7 @@ exports.register = async (req, res) => {
       correo,
     });
     const userSaved = await newUser.save();
-    console.log(userSaved);
+    //console.log(userSaved);
 
     const token = await jwtt.createAccessToken({
       id: userSaved._id,
@@ -30,12 +30,13 @@ exports.register = async (req, res) => {
       httpOnly: false,
     });*/
     res.json({
-      id: userSaved._id,
-      username: userSaved.username,
-      correo: userSaved.correo,
-      name: userSaved.name,
-      birthdate: userSaved.birthdate,
-      idDoc: userSaved.idDoc,
+      token: token,
+      //id: userSaved._id,
+      //username: userSaved.username,
+      //correo: userSaved.correo,
+      //name: userSaved.name,
+      //birthdate: userSaved.birthdate,
+      //idDoc: userSaved.idDoc,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -64,12 +65,12 @@ exports.login = async (req, res) => {
 
     res.json({
       token: token,
-      id: userFound._id,
-      username: userFound.username,
-      correo: userFound.correo,
-      name: userFound.name,
-      birthdate: userFound.birthdate,
-      idDoc: userFound.idDoc,
+      //id: userFound._id,
+      //username: userFound.username,
+      //correo: userFound.correo,
+      //name: userFound.name,
+      //birthdate: userFound.birthdate,
+      //idDoc: userFound.idDoc,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

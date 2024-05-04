@@ -18,9 +18,9 @@ exports.updateUser = async (req, res) => {
   try {
     const { username, name, idDoc, birthdate } = req.body;
 
-    console.log(birthdate);
+    //console.log(birthdate);
     const birthdayDate = new Date(birthdate);
-    console.log(birthdayDate);
+    //console.log(birthdayDate);
 
     const userupdate = await User.findOneAndUpdate(
       { _id: req.params.id },
