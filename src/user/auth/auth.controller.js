@@ -9,7 +9,12 @@ exports.register = async (req, res) => {
 
   try {
     const userFound = await User.findOne({ correo });
+
     if (userFound) return res.status(400).json(["Correo ya en uso"]);
+
+    const usernamefound = await User.findOne({ username });
+    if (usernamefound)
+      return res.status(400).json(["Nombre de usuario ya en uso"]);
 
     const passwordhash = await bcrypt.hash(password, 10);
 

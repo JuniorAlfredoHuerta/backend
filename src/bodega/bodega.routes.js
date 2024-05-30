@@ -16,5 +16,6 @@ router.put("/bodegasde/:id", auth.authRequired, bodegacontroller.deleteUser);
 router.post("/bodegas", auth.authRequired, bodegacontroller.createBodega);
 //conseguir bodega por id
 router.get("/bodegas/:id", auth.authRequired, bodegacontroller.getBodegasById);
-
+// get all bodegas
+router.get("/allbodegas", auth.authRequired, bodegacontroller.getAllBodegas);
 module.exports = router;
