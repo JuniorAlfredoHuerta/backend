@@ -37,3 +37,8 @@ exports.deleteUser = (req, res) => {
   const { id } = req.params;
   generalFunctions.deleteModel(User, id, res);
 };
+
+exports.editbymail = async (req, res) => {
+  try {
+  } catch (error) {}
+};

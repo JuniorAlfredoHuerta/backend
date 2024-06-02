@@ -48,6 +48,27 @@ exports.register = async (req, res) => {
   }
 };
 
+exports.editpass = async (req, res) => {
+  const { correo, password } = req.body;
+
+  try {
+    const userFound = await User.findOne({ correo });
+    if (!userFound) return res.status(400).json(["Correo no registrado"]);
+
+    const passwordhash = await bcrypt.hash(password, 10);
+
+    if (userFound) {
+      const userupdate = await User.findOneAndUpdate({
+        _id: userFound._id,
+        password: passwordhash,
+      });
+    }
+    res.json({ message: "CAMBIADO" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 exports.login = async (req, res) => {
   const { correo, password } = req.body;
 
